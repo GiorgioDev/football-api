@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RootNamespace>Santex_Football.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Santex-Football.Database\Santex-Football.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EFCore.BulkExtensions">
+      <HintPath>..\..\..\..\.nuget\packages\efcore.bulkextensions\2.1.7\lib\netstandard2.0\EFCore.BulkExtensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

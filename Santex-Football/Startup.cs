@@ -52,6 +52,8 @@ namespace Santex_Football
             app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
             {
                 settings.GeneratorSettings.DefaultUrlTemplate = "{controller}/{action}/{id?}";
+                settings.GeneratorSettings.Title = "Football API";
+
 
             });
         }

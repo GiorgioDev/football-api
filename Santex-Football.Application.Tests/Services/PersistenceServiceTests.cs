@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Santex_Football.Application.Entities;
-using Santex_Football.Application.Mapper;
+using Santex_Football.Application.Mappers;
 using Santex_Football.Application.Services;
 using Santex_Football.Database.Models;
 using Santex_Football.Infrastructure.Repositories;

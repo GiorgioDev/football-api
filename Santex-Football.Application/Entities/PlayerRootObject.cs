@@ -7,5 +7,6 @@ namespace Santex_Football.Application.Entities
         public Santex_Football.Application.Entities.Links _links { get; set; }
         public int count { get; set; }
         public List<Player> players { get; set; }
+        public int TeamId { get; set; }
     }
 }

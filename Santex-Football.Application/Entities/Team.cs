@@ -8,6 +8,8 @@
         public string shortName { get; set; }
         public object squadMarketValue { get; set; }
         public string crestUrl { get; set; }
+
+        public int TeamId { get; set; }
     }
 
     //partial class Competition

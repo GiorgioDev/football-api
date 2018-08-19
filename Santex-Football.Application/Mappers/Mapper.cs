@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using Player = Santex_Football.Database.Models.Player;
 using Team = Santex_Football.Application.Entities.Team;
 
-namespace Santex_Football.Application.Mapper
+namespace Santex_Football.Application.Mappers
 {
     public class Mapper : IMapper
     {
-
         //TODO Move to AutoMapper
         public League MapLeague(CompetitionRootObject league)
         {
@@ -23,25 +22,22 @@ namespace Santex_Football.Application.Mapper
             return l;
         }
 
-        public Database.Models.Team MapTeam(Team team, List<Player> players)
+        public Database.Models.Team MapTeam(Team team)
         {
             var teamModel = new Database.Models.Team();
 
             if (team != null)
             {
-                    teamModel.Name = team.name;
-                    teamModel.Code = team.code;
-                    teamModel.Shortname = team.shortName;
-
-                    if (players != null)
-                    {
-                        teamModel.Players = new List<Player>();
-                        teamModel.Players.AddRange(players);
-                    }
-                }
+                teamModel.Name = team.name;
+                teamModel.Code = team.code;
+                teamModel.Shortname = team.shortName;
+                
+            }
             return teamModel;
 
         }
+
+        
 
         public Player MapPlayer(Entities.Player player)
         {
@@ -54,7 +50,7 @@ namespace Santex_Football.Application.Mapper
                 playerModel.Position = player.position;
                 playerModel.DateOfBirth = player.dateOfBirth;
                 playerModel.ContractUntil = player.contractUntil;
-                
+
             }
             return playerModel;
         }

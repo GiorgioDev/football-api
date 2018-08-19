@@ -1,11 +1,10 @@
-﻿using System.Net.Http;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Santex_Football.Application;
-using Santex_Football.Application.Mapper;
+using Santex_Football.Application.Mappers;
 using Santex_Football.Application.Services;
 using Santex_Football.Database;
 using Santex_Football.Infrastructure.Repositories;
@@ -55,7 +54,7 @@ namespace Santex_Football
 
         private void SetupApplicationDependencies(IServiceCollection services)
         {
-            services.AddSingleton<HttpClient>();
+            services.AddHttpClient<IFootballDataClient, FootballDataClient>();
 
             services.AddScoped<ILeagueService, LeagueService>();
             services.AddScoped<IImportService, ImportService>();

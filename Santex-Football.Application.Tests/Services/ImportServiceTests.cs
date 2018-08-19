@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Santex_Football.Application.Entities;
 using Santex_Football.Application.Services;
@@ -12,29 +13,43 @@ namespace Santex_Football.Application.Tests.Services
     public class ImportServiceTests
     {
         private readonly Mock<IPersistenceService> _persistenceService;
-        private readonly MockHttpClient _mockHttpClient;
+        private readonly Mock<IFootballDataClient> _mockHttpClient;
 
         public ImportServiceTests()
         {
-            _mockHttpClient = new MockHttpClient();
+            _mockHttpClient = new Mock<IFootballDataClient>();
             _persistenceService = new Mock<IPersistenceService>();
         }
 
         [TestMethod]
-        public async Task ShouldInvokeTheApiOk()
+        public async Task ShouldPersistsDataWithImportData()
         {
             //ARRANGE
             const string leaguecode = "Dummy League Code";
-            const string leagueurl = "/v1/competitions";
-            var mockClient = _mockHttpClient.GetMockClient(leagueurl);
-
-            var sut = new ImportService(_persistenceService.Object, mockClient);
+            var sut = new ImportService(_persistenceService.Object, _mockHttpClient.Object);
 
             //ACT
             await sut.Import(leaguecode);
 
             //ASSERT
             _persistenceService.Verify(p => p.SaveData(It.IsAny<List<CompetitionRootObject>>(), It.IsAny<List<TeamRootObject>>(), It.IsAny<List<PlayerRootObject>>(), leaguecode), Times.Once);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task ShouldThrowAnExceptionIfClientFails()
+        {
+            //ARRANGE
+            const string leaguecode = "Dummy League Code";
+            _mockHttpClient.Setup(c => c.GetCompetitionsAsync(leaguecode)).Throws<InvalidOperationException>();
+
+            var sut = new ImportService(_persistenceService.Object, _mockHttpClient.Object);
+
+            //ACT
+            await sut.Import(leaguecode);
+
+            //ASSERT
         }
     }
 }

@@ -17,8 +17,9 @@ You need .NET Core 2.1+
 
 [You need a valid League Code](http://www.football-data.org/docs/v1/index.html#league_codes) You can use the 2 method availables:
 
-/import-leagues/total-players/CL 
-or
-/import-leagues/CL
-or
-/swagger
+
+
+
+| Swagger | Import-League | Total-Players |
+| ------- |:-----------|:-----------------:|
+| /swagger | /import-leagues/CL | /import-leagues/total-players/CL |

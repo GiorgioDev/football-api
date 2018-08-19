@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NSwag.AspNetCore;
 using Santex_Football.Application;
 using Santex_Football.Application.Mappers;
 using Santex_Football.Application.Services;
@@ -24,6 +26,7 @@ namespace Santex_Football
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSwagger();
             SetupApplicationDependencies(services);
             SetupInfraestructureDependencies(services);
             SetupDB(services);
@@ -42,6 +45,14 @@ namespace Santex_Football
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            
+
+            app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
+            {
+                settings.GeneratorSettings.DefaultUrlTemplate = "{controller}/{action}/{id?}";
+
             });
         }
 

@@ -9,6 +9,6 @@ namespace Santex_Football.Application.Mappers
     {
         League MapLeague(Entities.CompetitionRootObject league);
         Team MapTeam(Entities.Team team);
-        Player MapPlayer(Entities.Player player);
+        Player MapPlayer(Entities.Player player, int teamId);
     }
 }

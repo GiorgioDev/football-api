@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Santex_Football.Database.Models
 {
     public class Team
     {
+        //Internal id
         [Key]
         public int TeamId { get; set; }
         public string Name { get; set; }
@@ -16,6 +18,10 @@ namespace Santex_Football.Database.Models
 
         
         public int LeagueId { get; set; }
+
+        //ID from API 
+        [NotMapped]
+        public int Id { get; set; }
     }
 
 

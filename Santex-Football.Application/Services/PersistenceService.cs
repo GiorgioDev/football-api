@@ -1,10 +1,10 @@
-﻿using Santex_Football.Application.Entities;
-using Santex_Football.Application.Mappers;
+﻿using System;
+using Santex_Football.Application.Entities;
 using Santex_Football.Database.Models;
 using Santex_Football.Infrastructure.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Santex_Football.Application.Mappers;
 using Player = Santex_Football.Database.Models.Player;
 using Team = Santex_Football.Database.Models.Team;
 
@@ -15,15 +15,15 @@ namespace Santex_Football.Application.Services
         private readonly ILeagueRepository _leagueRepository;
         private readonly IMapper _mapper;
 
-        public PersistenceService(IMapper mapper,
+        public PersistenceService(IMapper mapper, 
             ILeagueRepository leagueRepository)
         {
             _leagueRepository = leagueRepository;
             _mapper = mapper;
         }
-        public async Task SaveData(List<CompetitionRootObject> leagues,
+        public async Task SaveData(List<CompetitionRootObject> leagues, 
             List<TeamRootObject> teams,
-            List<PlayerRootObject> players,
+            List<PlayerRootObject> players, 
             string leagueCode)
         {
 
@@ -33,13 +33,14 @@ namespace Santex_Football.Application.Services
 
             try
             {
-                MapTeamPlayers(teamsToSave, playersTosave);
-
+                
                 MapLeagues(leagues, leaguesToSave);
 
                 MapTeams(teams, teamsToSave);
 
                 MapPlayers(players, playersTosave);
+
+                MapTeamPlayers(teamsToSave, playersTosave);
 
                 await _leagueRepository.Save(leaguesToSave, teamsToSave, leagueCode);
 
@@ -50,14 +51,16 @@ namespace Santex_Football.Application.Services
             }
         }
 
-        private static void MapTeamPlayers(List<Team> teamsToSave, List<Player> playersTosave)
+        private  void MapTeamPlayers(IEnumerable<Team> teamsToSave, IList<Player> playersTosave)
         {
+
+
             foreach (var team in teamsToSave)
             {
-
                 foreach (var player in playersTosave)
                 {
-                    if (player.TeamId == team.TeamId)
+                    if (player.TeamIdExt == team.Id)
+
                         team.Players.Add(player);
                 }
             }
@@ -69,7 +72,7 @@ namespace Santex_Football.Application.Services
             {
                 foreach (var pl in player.players)
                 {
-                    var p = _mapper.MapPlayer(pl);
+                    var p = _mapper.MapPlayer(pl, player.TeamId);
                     playersTosave.Add(p);
                 }
 

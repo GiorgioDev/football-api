@@ -17,5 +17,9 @@ namespace Santex_Football.Database.Models
 
         public int TeamId { get; set; }
         public Team Team { get; set; }
+
+        //ID from the API
+        [NotMapped]
+        public int TeamIdExt { get; set; }
     }
 }

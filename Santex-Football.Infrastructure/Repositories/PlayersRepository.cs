@@ -12,25 +12,20 @@ namespace Santex_Football.Infrastructure.Repositories
         }
         public int GetTotalPlayersByLeagueCode(string leagueCode)
         {
-            //var teams =  LeagueContext.Leagues.Where(l => l.LeagueCode == leagueCode).Select(t => t.Teams);
-            IQueryable<League> teams = LeagueContext.Leagues.Where(l => l.LeagueCode == leagueCode);
-            var asd = teams.Select(t => t.Teams);
+            int total = 0;
 
-            var teamIds = new List<int>(); 
+            var leagues =  LeagueContext.Leagues.Where(l => l.LeagueCode == leagueCode);
 
-            //foreach (var team in teams)
-            //{
-            //    foreach (var t in team)
-            //    {
-            //        teamIds.Add(t.TeamId);
-            //    }
-            //}
+            var teams = leagues.Select(t => t.Teams);
 
-            var totalPlayers = LeagueContext.Players.Count(p => teamIds.Contains(p.TeamId));
+            var players = teams.Select(p => p.Select(x => x.Players));
 
-            return totalPlayers;
+            foreach (var player in players)
+            {
+                total = player.Aggregate(total, (current, p) => current + p.Count());
+            }
+
+            return total;
         }
-
-        
     }
 }

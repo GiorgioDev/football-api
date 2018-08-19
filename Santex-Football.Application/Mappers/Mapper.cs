@@ -31,7 +31,8 @@ namespace Santex_Football.Application.Mappers
                 teamModel.Name = team.name;
                 teamModel.Code = team.code;
                 teamModel.Shortname = team.shortName;
-                
+                teamModel.Id = team.TeamId;
+                teamModel.Players = new List<Player>();
             }
             return teamModel;
 
@@ -39,7 +40,7 @@ namespace Santex_Football.Application.Mappers
 
         
 
-        public Player MapPlayer(Entities.Player player)
+        public Player MapPlayer(Entities.Player player, int teamId)
         {
             var playerModel = new Player();
             if (player != null)
@@ -50,7 +51,7 @@ namespace Santex_Football.Application.Mappers
                 playerModel.Position = player.position;
                 playerModel.DateOfBirth = player.dateOfBirth;
                 playerModel.ContractUntil = player.contractUntil;
-
+                playerModel.TeamIdExt = teamId;
             }
             return playerModel;
         }

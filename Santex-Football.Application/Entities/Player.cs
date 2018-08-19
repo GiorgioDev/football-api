@@ -10,6 +10,5 @@
         public string contractUntil { get; set; }
         public object marketValue { get; set; }
 
-        public int teamId { get; set; }
     }
 }

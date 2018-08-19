@@ -4,14 +4,14 @@ A simple api to access football-data.org
 
 #### Usage
 
-###### Using Sandbox 
+##### Using Sandbox 
 
 This has the latest commit from master branch
 
 [Using Swagger UI](https://football-api-dev.azurewebsites.net/swagger)
 
 
-###### Running locally
+##### Running locally
 
 You need .NET Core 2.1+
 
@@ -20,4 +20,5 @@ You need .NET Core 2.1+
 /import-leagues/total-players/CL 
 or
 /import-leagues/CL
-
+or
+/swagger

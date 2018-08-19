@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Net.Http;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -54,6 +55,8 @@ namespace Santex_Football
 
         private void SetupApplicationDependencies(IServiceCollection services)
         {
+            services.AddSingleton<HttpClient>();
+
             services.AddScoped<ILeagueService, LeagueService>();
             services.AddScoped<IImportService, ImportService>();
             services.AddScoped<IMapper, Mapper>();

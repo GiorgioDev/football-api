@@ -6,7 +6,9 @@ namespace Santex_Football.Application.Services
 {
     public interface IPersistenceService
     {
-        Task SaveData(List<CompetitionRootObject> leagues, List<TeamRootObject> teams, List<PlayerRootObject> players,
+        Task SaveData(List<CompetitionRootObject> leagues, 
+            List<TeamRootObject> teams, 
+            List<PlayerRootObject> players,
             string leagueCode);
     }
 }

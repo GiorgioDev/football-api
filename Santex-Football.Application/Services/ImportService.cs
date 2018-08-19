@@ -10,14 +10,16 @@ namespace Santex_Football.Application.Services
 {
     public class ImportService : IImportService
     {
-        private readonly HttpClient _client = new HttpClient();
+        private readonly HttpClient _client  = new HttpClient();
 
         private readonly IPersistenceService _persistenceService;
 
         public ImportService(IPersistenceService persistenceService)
         {
-            SetupClient();
             _persistenceService = persistenceService;
+            //_client = client;
+            SetupClient();
+            
         }
 
         public async Task Import(string leagueCode)
@@ -27,7 +29,7 @@ namespace Santex_Football.Application.Services
             var players = await GetPlayersAsync(teams);
             
             await _persistenceService.SaveData(leagues, teams, players, leagueCode);
-           
+               
         }
 
         private void SetupClient()
@@ -92,7 +94,6 @@ namespace Santex_Football.Application.Services
                 foreach (var t in team.teams)
                 {
                     var link = t._links.players.href;
-                    //var link = team._links.teams.href;
                     var response = await _client.GetAsync(link);
 
                     if (response.IsSuccessStatusCode)
@@ -102,7 +103,6 @@ namespace Santex_Football.Application.Services
                         players.Add(player);
                     }
                 }
-
             }
             return players;
         }

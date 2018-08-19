@@ -10,20 +10,20 @@ using Santex_Football.Database.Models;
 using Santex_Football.Infrastructure.Repositories;
 using Team = Santex_Football.Database.Models.Team;
 
-namespace Santex_Football.Application.Tests
+namespace Santex_Football.Application.Tests.Services
 {
     [TestClass]
     public class PersistenceServiceTests
     {
 
-        private Mock<ILeagueRepository> leagueRepoMock;
-        private Mock<IMapper> mapperMock;
+        private readonly Mock<ILeagueRepository> _leagueRepoMock;
+        private readonly Mock<IMapper> _mapperMock;
 
 
         public PersistenceServiceTests()
         {
-            leagueRepoMock = new Mock<ILeagueRepository>();
-            mapperMock = new Mock<IMapper>();
+            _leagueRepoMock = new Mock<ILeagueRepository>();
+            _mapperMock = new Mock<IMapper>();
         }
        
         [TestMethod]
@@ -35,13 +35,13 @@ namespace Santex_Football.Application.Tests
             var players = new List<PlayerRootObject>();
             string leaguecode = "Dummy league code";
             
-            var sut = new PersistenceService(mapperMock.Object, leagueRepoMock.Object);
+            var sut = new PersistenceService(_mapperMock.Object, _leagueRepoMock.Object);
             
             //ACT
             await sut.SaveData(leagues, teams, players, leaguecode);
             
             //ASSERT
-            leagueRepoMock.Verify(mock => mock.Save(It.IsAny<List<League>>(),
+            _leagueRepoMock.Verify(mock => mock.Save(It.IsAny<List<League>>(),
                 It.IsAny<List<Team>>(),
                 leaguecode), Times.Once());
 
@@ -57,11 +57,11 @@ namespace Santex_Football.Application.Tests
             var players = new List<PlayerRootObject>();
             string leaguecode = "Dummy league code";
 
-            leagueRepoMock.Setup(x => x.Save(It.IsAny<List<League>>(),
+            _leagueRepoMock.Setup(x => x.Save(It.IsAny<List<League>>(),
                 It.IsAny<List<Team>>(),
                 It.IsAny<string>())).Throws<InvalidOperationException>();
 
-            var sut = new PersistenceService(mapperMock.Object, leagueRepoMock.Object);
+            var sut = new PersistenceService(_mapperMock.Object, _leagueRepoMock.Object);
 
             //ACT
             await sut.SaveData(leagues, teams, players, leaguecode);

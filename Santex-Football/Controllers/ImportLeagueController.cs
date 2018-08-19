@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace Santex_Football.Controllers
 {
-
-
-
-
     [Produces("application/json")]
     [Route("import-league")]
     public class ImportLeagueController : Controller
@@ -32,7 +28,6 @@ namespace Santex_Football.Controllers
 
         public async Task<IActionResult> Import(string leagueCode)
         {
-
             try
             {
                 await _leagueService.ImportLeague(leagueCode);

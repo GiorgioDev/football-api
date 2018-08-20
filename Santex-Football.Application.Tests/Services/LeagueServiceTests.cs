@@ -11,10 +11,10 @@ namespace Santex_Football.Application.Tests.Services
     public class LeagueServiceTests
     {
 
-        private Mock<ILeagueCodeRepository> _leagueCodeRepository;
-        private Mock<ILeagueRepository> _leagueRepository;
-        private Mock<IPlayersRepository> _playersRepository;
-        private Mock<IImportService> _importService;
+        private readonly Mock<ILeagueCodeRepository> _leagueCodeRepository;
+        private readonly Mock<ILeagueRepository> _leagueRepository;
+        private readonly Mock<IPlayersRepository> _playersRepository;
+        private readonly Mock<IImportService> _importService;
 
         public LeagueServiceTests()
         {
@@ -70,24 +70,6 @@ namespace Santex_Football.Application.Tests.Services
         }
 
 
-
-        [TestMethod]
-        [ExpectedException(typeof(LeagueNotFoundException))]
-        public async Task ShouldThrownAnExceptionIfLeagueCodeIsNotValidWhenImportingLeague()
-        {
-            //ARRANGE
-            const string leaguecode = "not valid League code";
-
-            var sut = new LeagueService(_leagueCodeRepository.Object,
-                _leagueRepository.Object,
-                _playersRepository.Object,
-                _importService.Object);
-
-            //ACT
-            await sut.ImportLeague(leaguecode);
-
-            //ASSERT
-        }
 
         [TestMethod]
         [ExpectedException(typeof(LeagueAlreadyImportedException))]

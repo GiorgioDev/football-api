@@ -33,12 +33,6 @@ namespace Santex_Football.Controllers
                 await _leagueService.ImportLeague(leagueCode);
             }
 
-            //League not found 404
-            catch (LeagueNotFoundException)
-            {
-                return NotFound("League: " + leagueCode + " Not Found");
-            }
-
             //Already imported 409
             catch (LeagueAlreadyImportedException)
             {
@@ -72,6 +66,21 @@ namespace Santex_Football.Controllers
             }
 
             return Ok("total: " + totalPlayers);
+        }
+
+        [HttpGet("clean-up")]
+        public async Task<IActionResult> CleanUp()
+        {
+            try
+            {
+                await _leagueService.CleanUpAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Clean up Failed : "+ ex.Message);
+            }
+
+            return Ok("Everything was clean up!");
         }
     }
 }

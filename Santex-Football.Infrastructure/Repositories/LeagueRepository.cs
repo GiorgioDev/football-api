@@ -57,6 +57,15 @@ namespace Santex_Football.Infrastructure.Repositories
             await LeagueContext.SaveChangesAsync();
         }
 
+        public async Task CleanUp()
+        {
+            await LeagueContext.Database.ExecuteSqlCommandAsync("DELETE FROM ImportedLeagues");
+            await LeagueContext.Database.ExecuteSqlCommandAsync("DELETE FROM Leagues");
+            await LeagueContext.Database.ExecuteSqlCommandAsync("DELETE FROM Players");
+            await LeagueContext.Database.ExecuteSqlCommandAsync("DELETE FROM Teams");
+            await LeagueContext.Database.ExecuteSqlCommandAsync("DELETE FROM LeagueTeam");
+        }
+
         private IEnumerable<Team> RemoveExistingTeams(List<Team> teamsToSave)
         {
             var newTeams = new List<Team>();

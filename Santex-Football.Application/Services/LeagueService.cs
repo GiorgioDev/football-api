@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Santex_Football.Application.Exceptions;
+﻿using Santex_Football.Application.Exceptions;
 using Santex_Football.Infrastructure.Repositories;
+using System;
+using System.Threading.Tasks;
 
 namespace Santex_Football.Application.Services
 {
@@ -13,9 +13,9 @@ namespace Santex_Football.Application.Services
         private readonly IPlayersRepository _playersRepository;
         private readonly IImportService _importService;
 
-        public LeagueService(ILeagueCodeRepository leagueCodeRepository, 
-            ILeagueRepository leagueRepository, 
-            IPlayersRepository playersRepository, 
+        public LeagueService(ILeagueCodeRepository leagueCodeRepository,
+            ILeagueRepository leagueRepository,
+            IPlayersRepository playersRepository,
             IImportService importService)
         {
             _leagueCodeRepository = leagueCodeRepository;
@@ -28,8 +28,6 @@ namespace Santex_Football.Application.Services
         {
             try
             {
-                await CheckIfLeagueExists(leagueCode);
-
                 var alreadyImportedLeague = await _leagueRepository.CheckIfLeagueIsAlreadyImported(leagueCode);
 
                 if (alreadyImportedLeague)
@@ -43,7 +41,7 @@ namespace Santex_Football.Application.Services
             }
         }
 
-        
+
 
         public async Task<int> TotalPlayersByLeagueCode(string leagueCode)
         {
@@ -59,6 +57,20 @@ namespace Santex_Football.Application.Services
             }
         }
 
+        public async Task CleanUpAsync()
+        {
+
+            try
+            {
+                await _leagueRepository.CleanUp();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
         private async Task CheckIfLeagueExists(string leagueCode)
         {
             var leagueExists = await _leagueCodeRepository.CheckIfLeagueExists(leagueCode);
@@ -67,4 +79,4 @@ namespace Santex_Football.Application.Services
                 throw new LeagueNotFoundException();
         }
     }
-} 
+}

@@ -8,5 +8,6 @@ namespace Santex_Football.Infrastructure.Repositories
     {
         Task<bool> CheckIfLeagueIsAlreadyImported(string leagueCode);
         Task Save(List<League> leaguesToSave, List<Team> teamsToSave, string leagueCode);
+        Task CleanUp();
     }
 }

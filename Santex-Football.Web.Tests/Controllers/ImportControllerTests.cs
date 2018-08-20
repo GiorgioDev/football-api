@@ -81,26 +81,6 @@ namespace Santex_Football.Web.Tests.Controllers
             Assert.AreEqual("Successfully imported", createdResult.Value);
         }
 
-        [TestMethod]
-        public async Task ShouldReturnNotFoundIfLeagueWasNotFound()
-        {
-            //ARRANGE
-            const string leagueCode = " League code not found";
-            const string expectedMessage = "League: " + leagueCode + " Not Found";
-
-            _leagueService.Setup(l => l.ImportLeague(leagueCode)).Throws<LeagueNotFoundException>();
-
-            var controller = new ImportLeagueController(_leagueService.Object);
-
-            //ACT
-            var res = await controller.Import(leagueCode);
-
-            //ASSERT
-
-            var notFoundResult = res as NotFoundObjectResult;
-            Assert.IsNotNull(notFoundResult);
-            Assert.AreEqual(expectedMessage, notFoundResult.Value);
-        }
 
 
         [TestMethod]

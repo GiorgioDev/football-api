@@ -6,5 +6,6 @@ namespace Santex_Football.Application.Services
     {
         Task ImportLeague(string leagueCode);
         Task<int> TotalPlayersByLeagueCode(string leagueCode);
+        Task CleanUpAsync();
     }
 }

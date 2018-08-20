@@ -1,3 +1,5 @@
+[![Build status](https://giorgiodev.visualstudio.com/football-api/_apis/build/status/football-api-Azure%20Web%20App%20for%20ASP.NET-CI)](https://giorgiodev.visualstudio.com/football-api/_build/latest?definitionId=1)
+
 ## Football API
 A simple api to access football-data.org
 

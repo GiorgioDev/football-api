@@ -1,6 +1,17 @@
 ## Football API
 A simple api to access football-data.org
 
+#### Stack
+-.Net Core 2.1.
+-EF Core. 
+-DDD architecture.
+-Units testing.
+-Moq.
+-Swagger using NSwag.
+-Repository Pattern.
+-MS SQL.
+-CI/CD Using VSTS and Azure.
+-Includes a init-script.sql to populate a blank Database.
 
 #### Usage
 

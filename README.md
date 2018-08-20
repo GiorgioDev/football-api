@@ -23,3 +23,6 @@ You need .NET Core 2.1+
 | Swagger | Import-League | Total-Players |
 | ------- |:-----------|:-----------------:|
 | /swagger | /import-leagues/CL | /import-leagues/total-players/CL |
+| http://localhost:62020/swagger | http://localhost:62020/import-league/BL1 | http://localhost:62020/import-league/total-players/BL1 |
+| https://football-api-dev.azurewebsites.net/swagger | https://football-api-dev.azurewebsites.net/import-league/BL1 | https://football-api-dev.azurewebsites.net/import-league/total-players/BL1 |
+

@@ -15,7 +15,7 @@ namespace Santex_Football.Infrastructure.Repositories
         public async Task<bool> CheckIfLeagueExists(string leagueCode)
         {
             
-                return await LeagueContext.LeagueCodes.AnyAsync(x => x.LeagueCodeId == leagueCode);
+                return await LeagueContext.ImportedLeagues.AnyAsync(x => x.LeagueCodeId == leagueCode);
             
         }
 

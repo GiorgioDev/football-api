@@ -23,7 +23,7 @@ namespace Santex_Football.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(409)]
         [ProducesResponseType(504)]
-        // GET: /CL/BL1
+        // GET: import-league/BL1
         [HttpGet("{leagueCode}")]
 
         public async Task<IActionResult> Import(string leagueCode)
@@ -57,7 +57,7 @@ namespace Santex_Football.Controllers
         }
 
 
-        // GET: TotalPlayers/BL1
+        // GET: import-league/total-players/BL1
         [HttpGet("total-players/{leagueCode}")]
         public async Task<IActionResult> TotalPlayers(string leagueCode)
         {

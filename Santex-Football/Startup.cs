@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Net.Http.Headers;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSwag.AspNetCore;
 using Santex_Football.Application;
+using Santex_Football.Application.Clients;
 using Santex_Football.Application.Mappers;
 using Santex_Football.Application.Services;
 using Santex_Football.Database;
@@ -52,7 +55,7 @@ namespace Santex_Football
             app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
             {
                 settings.GeneratorSettings.DefaultUrlTemplate = "{controller}/{action}/{id?}";
-                settings.GeneratorSettings.Title = "Football API";
+                settings.GeneratorSettings.Title = Configuration["SwaggerTitle"];
 
 
             });
@@ -67,7 +70,15 @@ namespace Santex_Football
 
         private void SetupApplicationDependencies(IServiceCollection services)
         {
-            services.AddHttpClient<IFootballDataClient, FootballDataClient>();
+            services.AddHttpClient<IFootballDataClient, FootballDataClient>(client =>
+            {
+                
+            client.BaseAddress = new Uri(Configuration["FootballDataClient:0:BaseAddress"]);
+            client.DefaultRequestHeaders.Add("x-auth-token", Configuration["FootballDataClient:0:Token"]);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+            });
 
             services.AddScoped<ILeagueService, LeagueService>();
             services.AddScoped<IImportService, ImportService>();

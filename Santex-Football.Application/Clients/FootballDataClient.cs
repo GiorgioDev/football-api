@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using Santex_Football.Application.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Santex_Football.Application.Entities;
 
-namespace Santex_Football.Application
+namespace Santex_Football.Application.Clients
 {
     public class FootballDataClient : IFootballDataClient
     {
@@ -15,13 +13,6 @@ namespace Santex_Football.Application
         public FootballDataClient(HttpClient client)
         {
             _client = client;
-
-            //TODO move to config file
-            _client.BaseAddress = new Uri("http://api.football-data.org/v1/");
-            _client.DefaultRequestHeaders.Add("x-auth-token", "3cb2028264a34a9184a98a023a39a0c8 ");
-            _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<List<CompetitionRootObject>> GetCompetitionsAsync(string leagueCode)

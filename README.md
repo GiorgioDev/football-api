@@ -31,9 +31,9 @@ You need .NET Core 2.1+
 
 
 
-| Swagger | Import-League | Total-Players |
-| ------- |:-----------|:-----------------:|
-| /swagger | /import-leagues/CL | /import-leagues/total-players/CL |
-| http://localhost:62020/swagger | http://localhost:62020/import-league/BL1 | http://localhost:62020/import-league/total-players/BL1 |
-| https://football-api-dev.azurewebsites.net/swagger | https://football-api-dev.azurewebsites.net/import-league/BL1 | https://football-api-dev.azurewebsites.net/import-league/total-players/BL1 |
+| Swagger | Import-League | Total-Players | Clean UP | 
+| ------- |:-----------|:-----------------:|:-----------------:|
+| /swagger | /import-leagues/CL | /import-leagues/total-players/CL |/import-leagues/clean-up
+| http://localhost:62020/swagger | http://localhost:62020/import-league/BL1 | http://localhost:62020/import-league/total-players/BL1 |http://localhost:62020/import-league/clean-up | 
+| https://football-api-dev.azurewebsites.net/swagger | https://football-api-dev.azurewebsites.net/import-league/BL1 | https://football-api-dev.azurewebsites.net/import-league/total-players/BL1 | https://football-api-dev.azurewebsites.net/import-league/clean-up | 
 
